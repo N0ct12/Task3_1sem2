@@ -47,7 +47,6 @@ public class ListUtils {
         int[] arr = new int[q.size()];
         for (int i = 0; i < arr.length; i++) {
             arr[i] = q.poll();
-            q.add(arr[i]);
         }
         return arr;
     }
