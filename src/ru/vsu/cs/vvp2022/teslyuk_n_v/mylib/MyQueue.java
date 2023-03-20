@@ -3,7 +3,7 @@ package ru.vsu.cs.vvp2022.teslyuk_n_v.mylib;
 
 public class MyQueue {
 
-    private static class QueueNode{
+    private static class QueueNode {
 
         private int value;
         private QueueNode next;
@@ -14,7 +14,7 @@ public class MyQueue {
         }
 
         public QueueNode(int value) {
-            this(value,null);
+            this(value, null);
         }
 
 
@@ -34,38 +34,47 @@ public class MyQueue {
             this.next = next;
         }
     }
+
     private QueueNode head;
     private QueueNode tail;
 
     private int size;
 
-    public MyQueue(){
+    public MyQueue() {
         head = null;
         tail = null;
         size = 0;
     }
 
-    public int size(){
+    public int size() {
         return size;
     }
 
-    public boolean isEmpty(){
+    public boolean isEmpty() {
         return head == null;
     }
 
-
-        public int poll() throws Exception {
-            if (isEmpty()){
-                throw new RuntimeException("List is empty");
-            }
-            QueueNode curr = head;
-            head = head.next;
-            if (size == 1) {
-                tail = null;
-            }
-            size--;
-            return curr.getValue();
+    /**returns but doesn't remove*/
+    public int peek() throws Exception {
+        if (isEmpty()) {
+            throw new RuntimeException("Queue is empty");
         }
+        return head.getValue();
+    }
+
+    /**removes and returns 1st*/
+    public int poll() throws Exception {
+        if (isEmpty()) {
+            throw new RuntimeException("Queue is empty");
+        }
+        QueueNode curr = head;
+        head = head.next;
+        if (size == 1) {
+            tail = head = null;
+        }
+        size--;
+        return curr.getValue();
+    }
 
 
 //    public int get(int index) throws Exception {
@@ -81,15 +90,15 @@ public class MyQueue {
 //    }
 
 
-        public void add(int val){
-            QueueNode n = new QueueNode(val);
-            if (isEmpty()){
-                head = tail = n;
-                size++;
-                return;
-            }
-            tail.next = n;
-            tail = n;
+    public void add(int val) {
+        QueueNode n = new QueueNode(val);
+        if (isEmpty()) {
+            head = tail = n;
             size++;
+            return;
         }
+        tail.next = n;
+        tail = n;
+        size++;
     }
+}

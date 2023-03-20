@@ -53,7 +53,7 @@ public class ListUtils {
     public static int[] convertJQueueToArr(Queue<Integer> q) throws Exception {
         int[] arr = new int[q.size()];
         for (int i = 0; i < arr.length; i++) {
-            arr[i] = q.peek();
+            arr[i] = q.poll();
         }
         return arr;
     }
