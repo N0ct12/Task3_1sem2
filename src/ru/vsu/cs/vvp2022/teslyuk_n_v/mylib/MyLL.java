@@ -1,6 +1,4 @@
-package MyBib;
-
-import soloma.SimpleLinkedList;
+package ru.vsu.cs.vvp2022.teslyuk_n_v.mylib;
 
 public class MyLL {
     private static class Node{
@@ -91,7 +89,7 @@ public class MyLL {
         size++;
     }
 
-    public void removeFirst() throws SimpleLinkedList.SimpleLinkedListException {
+    public void removeFirst()  {
         if (isEmpty()) throw new RuntimeException("List is empty");
 
         head = head.next;

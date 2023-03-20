@@ -1,8 +1,8 @@
-import utils.ArrayUtils;
-import utils.JTableUtils;
-import utils.ListUtils;
-import utils.SwingUtils;
-import MyBib.*;
+package ru.vsu.cs.vvp2022.teslyuk_n_v;
+
+import ru.vsu.cs.vvp2022.teslyuk_n_v.utils.*;
+import ru.vsu.cs.vvp2022.teslyuk_n_v.mylib.*;
+
 
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
@@ -12,7 +12,8 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.text.ParseException;
 import java.util.ArrayList;
-
+import java.util.List;
+import java.util.Queue;
 
 
 public class Table extends JFrame {
@@ -21,9 +22,9 @@ public class Table extends JFrame {
     private JButton importButton;
 
     private JTable inputTable;
-    private JTextField answerField;
-    private JButton solutionButton;
+    private JButton sortButton;
     private JTable outputTable;
+    private JButton nSortButton;
     private JFileChooser fileChooserOpen;
 
     private JMenuBar menuBarMain;
@@ -86,14 +87,29 @@ public class Table extends JFrame {
                 }
             }
         });
-        solutionButton.addActionListener(new ActionListener() {
+        sortButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 try {
                     int[] arr = JTableUtils.readIntArrayFromJTable(inputTable);
                     MyQueue q = ListUtils.convertArrToQueue(arr);
-                    q.sort();
+                    ListUtils.sort(q);
                     arr = ListUtils.convertQueueToArr(q);
+                    JTableUtils.writeArrayToJTable(outputTable, arr);
+                } catch (Exception e) {
+                    SwingUtils.showErrorMessageBox(e);
+                }
+            }
+        });
+
+        nSortButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                try {
+                    int[] arr = JTableUtils.readIntArrayFromJTable(inputTable);
+                    Queue q = ListUtils.convertArrToJQueue(arr);
+                    ListUtils.sort(q);
+                    arr = ListUtils.convertJQueueToArr(q);
                     JTableUtils.writeArrayToJTable(outputTable, arr);
                 } catch (Exception e) {
                     SwingUtils.showErrorMessageBox(e);

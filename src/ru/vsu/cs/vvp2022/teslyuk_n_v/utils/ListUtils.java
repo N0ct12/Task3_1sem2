@@ -1,8 +1,10 @@
-package utils;
+package ru.vsu.cs.vvp2022.teslyuk_n_v.utils;
 
-import MyBib.*;
+import ru.vsu.cs.vvp2022.teslyuk_n_v.mylib.*;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class ListUtils {
     public static ArrayList<Integer> convertMatrixToList(int[][] matrix){
@@ -44,7 +46,15 @@ public class ListUtils {
     public static int[] convertQueueToArr(MyQueue q) throws Exception {
         int[] arr = new int[q.size()];
         for (int i = 0; i < arr.length; i++) {
-            arr[i] = q.get(i);
+            arr[i] = q.poll();
+            q.add(arr[i]);
+        }
+        return arr;
+    }
+    public static int[] convertJQueueToArr(Queue<Integer> q) throws Exception {
+        int[] arr = new int[q.size()];
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = q.peek();
         }
         return arr;
     }
@@ -55,5 +65,46 @@ public class ListUtils {
             q.add(arr[i]);
         }
         return q;
+    }
+    public static Queue<Integer> convertArrToJQueue(int[] arr) throws Exception {
+        Queue<Integer> q = new LinkedList();
+        for (int i = 0; i < arr.length; i++) {
+            q.add(arr[i]);
+        }
+        return q;
+    }
+
+    public static void sort(MyQueue q) throws Exception {
+        int tmp = 0;
+        for (int i = 0; i < q.size(); i++) {
+            tmp = q.poll();
+            for (int j = 0; j < q.size(); j++) {
+                int tmp2 = q.poll();
+                if (tmp2 > tmp) {
+                    q.add(tmp);
+                    tmp = tmp2;
+                } else {
+                    q.add(tmp2);
+                }
+            }
+            q.add(tmp);
+        }
+    }
+
+    public static void sort(Queue<Integer> q) {
+        int tmp = 0;
+        for (int i = 0; i < q.size(); i++) {
+            tmp = q.poll();
+            for (int j = 0; j < q.size(); j++) {
+                int tmp2 = q.poll();
+                if (tmp2 > tmp) {
+                    q.add(tmp);
+                    tmp = tmp2;
+                } else {
+                    q.add(tmp2);
+                }
+            }
+            q.add(tmp);
+        }
     }
 }

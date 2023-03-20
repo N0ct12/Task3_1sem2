@@ -1,4 +1,4 @@
-package utils;
+package ru.vsu.cs.vvp2022.teslyuk_n_v.utils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
